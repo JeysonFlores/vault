@@ -31,7 +31,7 @@ void Vault::Application::on_activate()
     auto app_window = new Vault::MainWindow();
     add_window(*app_window);
 
-    auto settings = Gio::Settings::create("com.github.jeysonflores.elementarycpp");
+    auto settings = Gio::Settings::create("com.github.jeysonflores.vault");
 
     int window_width { settings->get_int("window-width") };
     int window_height { settings->get_int("window-height") };

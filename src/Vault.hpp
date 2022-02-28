@@ -1,8 +1,8 @@
 #pragma once
 
+#include "MainWindow.hpp"
 #include <granite.h>
 #include <gtkmm.h>
-#include "MainWindow.hpp"
 
 namespace Vault {
 class Application : public Gtk::Application {

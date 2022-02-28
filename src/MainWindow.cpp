@@ -1,6 +1,7 @@
 #include "MainWindow.hpp"
 
-Vault::MainWindow::MainWindow() {
+Vault::MainWindow::MainWindow()
+{
     this->show_all();
 }
 
