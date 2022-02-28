@@ -6,7 +6,6 @@ project('com.github.jeysonflores.vault', ['cpp', 'c'],
                    ],
 )
 
-
 subdir('data')
 
 executable(
@@ -16,9 +15,9 @@ executable(
 	dependencies: [
 		dependency('gtkmm-3.0'),
 		dependency('granite'),
+		dependency('fmt'),
 	],
 	install: true
 )
-
 
 meson.add_install_script('build-aux/post_install.py')
