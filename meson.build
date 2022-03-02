@@ -13,7 +13,7 @@ executable(
 	['src/Vault.hpp'],
 	['src/Application.hpp', 'src/Application.cpp'], 
 	['src/MainWindow.hpp', 'src/MainWindow.cpp'],
-	['src/Utils/Styles.hpp'],
+	['src/Style.hpp'],
 	dependencies: [
 		dependency('gtkmm-3.0'),
 		dependency('granite'),
