@@ -10,7 +10,8 @@ subdir('data')
 
 executable(
 	meson.project_name(),
-	['src/Vault.hpp', 'src/Vault.cpp'], 
+	['src/Vault.hpp'],
+	['src/Application.hpp', 'src/Application.cpp'], 
 	['src/MainWindow.hpp', 'src/MainWindow.cpp'],
 	['src/Utils/Styles.hpp'],
 	dependencies: [

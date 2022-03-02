@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Utils/Styles.hpp"
+#include "Vault.hpp"
 #include <fmt/core.h>
 #include <gtkmm.h>
 

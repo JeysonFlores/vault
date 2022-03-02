@@ -22,7 +22,7 @@ bool Vault::MainWindow::on_delete_event(GdkEventAny* event)
     int width, height;
     int pos_x, pos_y;
 
-    auto settings = Gio::Settings::create("com.github.jeysonflores.vault");
+    auto settings = Gio::Settings::create(Vault::ID);
 
     this->get_size((int&)width, (int&)height);
     this->get_position((int&)pos_x, (int&)pos_y);

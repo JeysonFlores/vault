@@ -1,7 +1,7 @@
-#include "Vault.hpp"
+#include "Application.hpp"
 
 Vault::Application::Application()
-    : Gtk::Application("com.github.jeysonflores.vault")
+    : Gtk::Application(Vault::ID)
 {
 }
 
@@ -29,7 +29,7 @@ void Vault::Application::on_activate()
     auto app_window = new Vault::MainWindow();
     add_window(*app_window);
 
-    auto settings = Gio::Settings::create("com.github.jeysonflores.vault");
+    auto settings = Gio::Settings::create(Vault::ID);
 
     int window_width { settings->get_int("window-width") };
     int window_height { settings->get_int("window-height") };
