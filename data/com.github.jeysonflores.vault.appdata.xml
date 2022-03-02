@@ -7,7 +7,7 @@
 	<name>Vault</name>
 	<summary>Save your code for later</summary>
 	<description>
-		<p>Make a doble ctrl + c to save your code for later.</p>
+		<p>Type ctrl + c twice to save your code for later.</p>
 	</description>
 	<provides>
 		<binary>com.github.jeysonflores.vault</binary>
