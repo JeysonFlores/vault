@@ -40,8 +40,17 @@ void Vault::MainWindow::on_clipboard_owner_change(GdkEventOwnerChange* event)
 {
     fmt::print("Clipboard event triggered\n");
 
-    m_last_copy_date = Glib::DateTime::create_now_local();
-    m_last_copy_hash = Glib::Checksum::compute_checksum(Glib::Checksum::ChecksumType::CHECKSUM_MD5, m_clipboard->wait_for_text());
+    Glib::DateTime dt_now { Glib::DateTime::create_now_local() };
 
-    fmt::print("String copied is {}\n", m_last_copy_hash);
+    std::string copied_text { m_clipboard->wait_for_text() };
+    std::string copied_text_hash { Glib::Checksum::compute_checksum(Glib::Checksum::ChecksumType::CHECKSUM_MD5, copied_text) };
+
+    fmt::print("Difference: {}\n", dt_now.difference(m_last_copy_date));
+
+    if (dt_now.difference(m_last_copy_date) <= 180000 && m_last_copy_hash == copied_text_hash) {
+        fmt::print("Copied text will be saved. Content is: {}\n", copied_text);
+    }
+
+    m_last_copy_date = dt_now;
+    m_last_copy_hash = copied_text_hash;
 }
