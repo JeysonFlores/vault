@@ -39,8 +39,9 @@ bool Vault::MainWindow::on_delete_event(GdkEventAny* event)
 void Vault::MainWindow::on_clipboard_owner_change(GdkEventOwnerChange* event)
 {
     fmt::print("Clipboard event triggered\n");
+
     m_last_copy_date = Glib::DateTime::create_now_local();
-    m_last_copy_hash = m_clipboard->wait_for_text();
+    m_last_copy_hash = Glib::Checksum::compute_checksum(Glib::Checksum::ChecksumType::CHECKSUM_MD5, m_clipboard->wait_for_text());
 
     fmt::print("String copied is {}\n", m_last_copy_hash);
 }
