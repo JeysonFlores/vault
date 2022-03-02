@@ -11,7 +11,8 @@ subdir('data')
 executable(
 	meson.project_name(),
 	['src/Vault.hpp', 'src/Vault.cpp'], 
-    ['src/MainWindow.hpp', 'src/MainWindow.cpp'],
+	['src/MainWindow.hpp', 'src/MainWindow.cpp'],
+	['src/Utils/Styles.hpp'],
 	dependencies: [
 		dependency('gtkmm-3.0'),
 		dependency('granite'),
