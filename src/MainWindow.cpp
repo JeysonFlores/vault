@@ -45,10 +45,14 @@ void Vault::MainWindow::on_clipboard_owner_change(GdkEventOwnerChange* event)
     std::string copied_text { m_clipboard->wait_for_text() };
     std::string copied_text_hash { Glib::Checksum::compute_checksum(Glib::Checksum::ChecksumType::CHECKSUM_MD5, copied_text) };
 
-    fmt::print("Difference: {}\n", dt_now.difference(m_last_copy_date));
+    fmt::print("Time difference: {}\n", dt_now.difference(m_last_copy_date));
 
     if (dt_now.difference(m_last_copy_date) <= 180000 && m_last_copy_hash == copied_text_hash) {
         fmt::print("Copied text will be saved. Content is: {}\n", copied_text);
+        auto notification = Gio::Notification::create("Text Saved!");
+        notification->set_body(copied_text);
+        notification->set_icon(Gio::Icon::create("process-completed"));
+        this->get_application()->send_notification(Vault::ID, notification);
     }
 
     m_last_copy_date = dt_now;
