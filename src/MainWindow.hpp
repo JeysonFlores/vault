@@ -16,7 +16,9 @@ protected:
 
 private:
     Gtk::HeaderBar m_headerbar;
-    Gtk::Label m_label;
+    Gtk::Stack m_stack;
+    Gtk::Button m_label;
+    Gtk::Button m_label2;
     Glib::RefPtr<Gtk::Clipboard> m_clipboard;
     Glib::DateTime m_last_copy_date;
     std::string m_last_copy_hash;

@@ -14,6 +14,7 @@ executable(
 	['src/Application.hpp', 'src/Application.cpp'], 
 	['src/MainWindow.hpp', 'src/MainWindow.cpp'],
 	['src/Style.hpp'],
+	['src/Views/WelcomeView.hpp', 'src/Views/WelcomeView.cpp'],
 	dependencies: [
 		dependency('gtkmm-3.0'),
 		dependency('granite'),
