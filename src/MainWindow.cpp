@@ -12,11 +12,11 @@ Vault::MainWindow::MainWindow()
     m_stack.set_transition_type(Gtk::StackTransitionType::STACK_TRANSITION_TYPE_SLIDE_RIGHT);
     m_stack.set_transition_duration(2000);
 
-    m_label.signal_clicked().connect([&]{
+    m_label.signal_clicked().connect([&] {
         m_stack.set_visible_child("list");
     });
-    
-    m_label2.signal_clicked().connect([&]{
+
+    m_label2.signal_clicked().connect([&] {
         m_stack.set_visible_child("welcome");
     });
 
