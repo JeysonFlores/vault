@@ -4,9 +4,9 @@
 
 namespace Vault {
 namespace Views {
-    class WelcomeView : public Gtk::Grid {
+    class MainView : public Gtk::Grid {
     public:
-        WelcomeView();
+        MainView();
 
     private:
         Gtk::Label m_title;

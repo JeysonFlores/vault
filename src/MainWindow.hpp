@@ -15,10 +15,10 @@ protected:
     void on_clipboard_owner_change(GdkEventOwnerChange* event);
 
 private:
-    Gtk::HeaderBar m_headerbar;
-    Gtk::Stack m_stack;
-    Gtk::Button m_label;
-    Gtk::Button m_label2;
+    Gtk::Paned m_header_paned;
+    Gtk::HeaderBar m_left_side_header;
+    Gtk::HeaderBar m_right_side_header;
+    Gtk::Grid m_grid;
     Glib::RefPtr<Gtk::Clipboard> m_clipboard;
     Glib::DateTime m_last_copy_date;
     std::string m_last_copy_hash;

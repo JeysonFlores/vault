@@ -1,0 +1,126 @@
+@define-color projectview_color #ffffff;
+@define-color pane_color shade (@bg_color, 1.02);
+@define-color pane_selected_color #D1DFFE;
+@define-color pane_text_color #333333;
+
+sidebar-header {
+    background-color: @pane_color;
+}
+
+.sidebar-header:dir(ltr) {
+    border-top-right-radius: 0;
+}
+
+.sidebar-header:dir(rtl) {
+    border-top-left-radius: 0;
+}
+
+.projectview-header {
+    background-color: @projectview_color;
+}
+
+.projectview-header:dir(ltr) {
+    border-top-left-radius: 0;
+}
+
+.projectview-header:dir(rtl) {
+    border-top-right-radius: 0;
+}
+
+paned {
+    background-color: @projectview_color;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+paned > separator {
+    margin-right: 0;
+    min-width: 1px;
+    min-height: 1px;
+}
+
+.pane {
+    background-color: @pane_color;
+    border-bottom-left-radius: 4px;
+}
+
+.pane:dir(rtl) {
+    border-bottom-right-radius: 4px;
+}
+
+pane-item {
+    font-weight: 600;
+}
+
+.pane-area {
+    font-weight: 700;
+}
+
+.pane-entry {
+    background-color: @pane_color;
+    color: @text_color;
+    padding-left: 0px;
+}
+
+.pane-entry:focus {
+    border-bottom: 1px solid alpha (@colorAccent, 0.8);
+    box-shadow: none;
+}
+
+.pane-row {
+    transition: all 210ms ease-in-out;
+    background-color: transparent;
+}
+
+.pane-row:selected {
+    background-color: @pane_selected_color;
+    color: @pane_text_color;
+    border-radius: 6px;
+}
+
+.pane-row button {
+    background-color: transparent;
+}
+
+.project-row:selected:focus image {
+    color: @pane_text_color;
+}
+
+.header-row {
+    transition: all 140ms ease-in-out;
+    background-color: transparent;
+}
+
+.hidden-button {
+    background-color: transparent;
+}
+
+.hidden-button image {
+    transition: all 150ms ease-in-out; 
+}
+
+.hidden-button image {
+    color: @text_color;
+}
+
+.hidden-button.opened image {
+    -gtk-icon-transform: rotate(90deg);
+}
+
+.inbox {
+    color: #3689e6;	
+}
+
+.today {
+    color: #f9c440;
+}
+
+.upcoming {
+    color: #ed5353;
+}
+
+.text_color {
+    color: @text_color;
+}

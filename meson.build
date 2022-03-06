@@ -6,21 +6,30 @@ project('com.github.jeysonflores.vault', ['cpp', 'c'],
                    ],
 )
 
+gnome = import('gnome')
+
+asresources = gnome.compile_resources (
+    'as-resources', 'data/' + meson.project_name() + '.gresource.xml',
+    source_dir: 'data',
+    c_name: 'as'
+)
+
 subdir('data')
 
 executable(
 	meson.project_name(),
+	asresources,
 	['src/Vault.hpp'],
 	['src/Application.hpp', 'src/Application.cpp'], 
 	['src/MainWindow.hpp', 'src/MainWindow.cpp'],
 	['src/Style.hpp'],
-	['src/Views/WelcomeView.hpp', 'src/Views/WelcomeView.cpp'],
+	['src/Views/MainView.hpp', 'src/Views/MainView.cpp'],
 	dependencies: [
 		dependency('gtkmm-3.0'),
 		dependency('granite'),
 		dependency('fmt'),
 	],
-	install: true
+	install: true,
 )
 
 meson.add_install_script('build-aux/post_install.py')

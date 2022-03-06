@@ -18,6 +18,7 @@ protected:
 
 private:
     static void on_prefers_color_scheme_changed();
+    static void load_css();
 };
 
 }

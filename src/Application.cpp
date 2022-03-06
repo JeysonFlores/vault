@@ -19,9 +19,18 @@ void Vault::Application::on_prefers_color_scheme_changed()
     gtk_settings->property_gtk_application_prefer_dark_theme().set_value(color_scheme == GRANITE_SETTINGS_COLOR_SCHEME_DARK);
 }
 
+void Vault::Application::load_css()
+{
+    auto css_provider = Gtk::CssProvider::create();
+    css_provider->load_from_resource("/com/github/jeysonflores/vault/style.css");
+
+    Gtk::StyleContext::add_provider_for_screen(Gdk::Screen::get_default(), css_provider, GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+}
+
 void Vault::Application::on_activate()
 {
     on_prefers_color_scheme_changed();
+    load_css();
 
     auto granite_settings = granite_settings_get_default();
     g_signal_connect(granite_settings, "notify::prefers-color-scheme", G_CALLBACK(&on_prefers_color_scheme_changed), NULL);
