@@ -1,0 +1,4 @@
+builddir
+.vscode
+daemon/builddir
+daemon/build

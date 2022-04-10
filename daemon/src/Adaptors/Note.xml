@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<node name="/com/github/jeysonflores">
+    <interface name="com.github.jeysonflores.daemon.Note">
+
+        <method name="GetAll">
+            <arg type="a(iss)" name="notes" direction="out" />
+        </method> 
+
+        <method name="GetById">
+            <arg type="i" name="id" direction="in" />
+            <arg type="(iss)" name="note" direction="out" />
+        </method>
+
+        <method name="Add">
+            <arg type="s" name="note" direction="in" />
+            <arg type="b" name="was_completed" direction="out" />
+        </method>
+
+        <method name="Update">
+            <arg type="i" name="id" direction="in" />
+            <arg type="s" name="note" direction="in" />
+            <arg type="b" name="was_completed" direction="out" />
+        </method>
+
+        <method name="Delete">
+            <arg type="i" name="id" direction="in" />
+            <arg type="b" name="was_completed" direction="out" />
+        </method>
+
+        <signal name="NoteAdded">
+            <arg type="i" name="id" />
+            <arg type="s" name="note" />
+            <arg type="s" name="date" />
+        </signal>
+
+        <signal name="NoteUpdated">
+            <arg type="i" name="id" />
+            <arg type="s" name="note" />
+            <arg type="s" name="date" />
+        </signal>
+
+        <signal name="NoteDeleted">
+            <arg type="i" name="id" />
+        </signal>
+
+    </interface>
+</node>
