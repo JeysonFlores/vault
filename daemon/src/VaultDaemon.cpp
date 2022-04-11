@@ -12,19 +12,26 @@ INIT_LOGGER;
 
 int main(int /*argc*/, char* /*argv*/[])
 {
-    auto connection = sdbus::createSessionBusConnection("com.github.jeysonflores.vault.daemon");
+    std::unique_ptr<sdbus::IConnection> connection;
+
+    try {
+        connection = sdbus::createSessionBusConnection("com.github.jeysonflores.vault.daemon");
+    } catch (std::exception& e) {
+        LOG(ERROR, "Name already taken. Aborting...");
+        exit(1);
+    }
 
     LOG(SUCCESS, "Name requested successfully...");
 
     std::string env_p;
-    if (std::getenv("XPRESSR_CONFIG_FLATPAK"))
-        env_p = std::getenv("XPRESSR_CONFIG_FLATPAK");
+    if (std::getenv("VAULT_DATABASE_PATH"))
+        env_p = std::getenv("VAULT_DATABASE_PATH");
     else {
         std::string db_path = "/.local/share/com.github.jeysonflores.vault.db";
         env_p = std::getenv("HOME") + db_path;
     }
 
-    std::cout << "Database path is: " << env_p << '\n';
+    LOG(INFO, "Database path is: " + env_p);
 
     //XpressrService::Services::DataManager dataManager(env_p.c_str());
 

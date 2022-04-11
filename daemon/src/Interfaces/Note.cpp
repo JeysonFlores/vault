@@ -13,10 +13,11 @@ Vault::Daemon::Interfaces::Note::Note(sdbus::IConnection& connection, std::strin
 }
 
 /**
- * @brief Destroy the Vault:: Daemon:: Interfaces:: Note:: Note object
+ * @brief Destroy the Vault::Daemon::Interfaces::Note::Note object
  * 
  */
-Vault::Daemon::Interfaces::Note::~Note() {
+Vault::Daemon::Interfaces::Note::~Note()
+{
     unregisterAdaptor();
 }
 
