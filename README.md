@@ -16,16 +16,10 @@
 </p>
 
 # Development
-  This project is being written using the [Gtkmm](https://www.gtkmm.org/en/) library and all its dependencies. For further information on how to
-  write Gtkmm code and how to use that library you can check this useful blogpost about Gtkmm.
   
-  Also, for string logging and string formatting/manipulation the [fmt](https://fmt.dev/) library is being used, Gtkmm implements similar features
-  however fmt can achieve it in a less verbose way and faster.
 ## Dependencies
     - granite
     - gtk+-3.0
-    - gtkmm-3.0
-    - fmt (8.0.0)
 
 # Acknowledgements
    - Thanks to [Devin Abbott](https://github.com/dabbott) for the idea. 
