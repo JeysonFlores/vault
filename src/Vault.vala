@@ -1,13 +1,13 @@
-namespace  Vault {
+namespace Vault {
     public class Application : Gtk.Application {
 
-        public Application() {
+        public Application () {
             Object (
                 application_id: "com.github.jeysonflores.vault",
                 flags: ApplicationFlags.FLAGS_NONE
             );
         }
-        
+
         protected override void activate () {
             var granite_settings = Granite.Settings.get_default ();
             var gtk_settings = Gtk.Settings.get_default ();
@@ -23,17 +23,17 @@ namespace  Vault {
             });
 
             var main_window = new Vault.MainWindow (this);
-            main_window.show_all();
+            main_window.show_all ();
         }
 
-        public static int main(string[] args) {
-            var date = new GLib.DateTime.now_local();
-            print(date.to_string());
-            print("\n");
-            print(date.format_iso8601());
-            var date2 = new GLib.DateTime.from_iso8601(date.format_iso8601(), null);
-            print("\n");
-            print(date2.format_iso8601());
+        public static int main (string[] args) {
+            var date = new GLib.DateTime.now_local ();
+            print (date.to_string ());
+            print ("\n");
+            print (date.format_iso8601 ());
+            var date2 = new GLib.DateTime.from_iso8601 (date.format_iso8601 (), null);
+            print ("\n");
+            print (date2.format_iso8601 ());
 
             return new Vault.Application ().run (args);
         }

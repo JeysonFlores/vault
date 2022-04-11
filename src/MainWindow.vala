@@ -1,13 +1,13 @@
 class Vault.MainWindow : Hdy.Window {
 
-    public MainWindow(Gtk.Application application) {
+    public MainWindow (Gtk.Application application) {
         Object (
             application: application
         );
     }
 
-    construct { 
-        Hdy.init();
+    construct {
+        Hdy.init ();
 
         var deck = new Hdy.Deck () {
             can_swipe_back = true,
@@ -23,7 +23,7 @@ class Vault.MainWindow : Hdy.Window {
 
         deck.add (welcome_view);
         deck.add (main_view);
-        
+
         this.add (deck);
     }
 }
