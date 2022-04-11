@@ -16,7 +16,7 @@ executable(
       ['src/VaultDaemon.cpp'],
       ['src/Adaptors/Note.hpp'],
       ['src/Interfaces/Note.hpp', 'src/Interfaces/Note.cpp'],
-      #['src/Services/DataManager.hpp', 'src/Services/DataManager.cpp'],
+      ['src/Services/DataManager.hpp', 'src/Services/DataManager.cpp'],
       ['src/Utils/Logger.hpp', 'src/Utils/Logger.cpp'], 
       dependencies: [
         dependency('sdbus-c++'),

@@ -23,17 +23,17 @@ int main(int /*argc*/, char* /*argv*/[])
 
     LOG(SUCCESS, "Name requested successfully...");
 
-    std::string env_p;
+    std::string dbPath;
     if (std::getenv("VAULT_DATABASE_PATH"))
-        env_p = std::getenv("VAULT_DATABASE_PATH");
+        dbPath = std::getenv("VAULT_DATABASE_PATH");
     else {
-        std::string db_path = "/.local/share/com.github.jeysonflores.vault.db";
-        env_p = std::getenv("HOME") + db_path;
+        std::string filePath = "/.local/share/com.github.jeysonflores.vault.db";
+        dbPath = std::getenv("HOME") + filePath;
     }
 
-    LOG(INFO, "Database path is: " + env_p);
+    LOG(INFO, "Database path is: " + dbPath);
 
-    //XpressrService::Services::DataManager dataManager(env_p.c_str());
+    //XpressrService::Services::DataManager dataManager(dbPath.c_str());
 
     Vault::Daemon::Interfaces::Note server(*connection, "/com/github/jeysonflores/vault/daemon/Note");
 
