@@ -1,4 +1,6 @@
 builddir
 .vscode
+build
+.flatpak-builder
 daemon/builddir
 daemon/build
