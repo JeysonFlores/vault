@@ -8,7 +8,7 @@ class Vault.MainWindow : Hdy.Window {
 
     construct { 
         Hdy.init();
-        
+
         var deck = new Hdy.Deck () {
             can_swipe_back = true,
             can_swipe_forward = true,
