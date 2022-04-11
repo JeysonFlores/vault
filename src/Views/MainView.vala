@@ -26,7 +26,7 @@ class Vault.Views.MainView : Gtk.Grid {
             print (dt_now.difference (this.last_copy_date).to_string () + "\n");
 
             if (dt_now.difference (this.last_copy_date) <= 180000 && copied_text_hash == this.last_copy_hash) {
-                print("Copied text will be saved. Contend: " + copied_text + "\n");
+                print ("Copied text will be saved. Contend: " + copied_text + "\n");
                 var notification = new GLib.Notification ("Text saved!");
                 notification.set_body (copied_text);
                 notification.set_icon (new ThemedIcon ("process-completed"));
