@@ -1,7 +1,7 @@
 class Vault.Views.WelcomeView : Gtk.Grid {
 
-    public WelcomeView() {
-        Object(
+    public WelcomeView () {
+        Object (
             orientation: Gtk.Orientation.VERTICAL
         );
     }

@@ -1,6 +1,6 @@
 [DBus (name = "com.github.jeysonflores.vault.daemon.Note")]
 interface Vault.Interfaces.Note : Object {
-    public abstract Vault.Models.Note[] get_all () throws  GLib.Error;
+    public abstract Vault.Models.Note[] get_all () throws GLib.Error;
     public abstract Vault.Models.Note get_by_id (int id) throws GLib.Error;
     public abstract bool add (string note) throws GLib.Error;
     public abstract bool update (int id, string note) throws GLib.Error;

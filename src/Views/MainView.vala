@@ -6,7 +6,7 @@ class Vault.Views.MainView : Gtk.Grid {
     public weak Vault.MainWindow parent_window { get; construct; }
 
     public MainView (Vault.MainWindow window) {
-        Object(
+        Object (
             orientation: Gtk.Orientation.VERTICAL,
             parent_window: window
         );
@@ -23,7 +23,7 @@ class Vault.Views.MainView : Gtk.Grid {
             var copied_text = this.clipboard.wait_for_text ();
             var copied_text_hash = GLib.Checksum.compute_for_string (GLib.ChecksumType.MD5, copied_text, -1);
 
-            print(dt_now.difference (this.last_copy_date).to_string() + "\n");
+            print (dt_now.difference (this.last_copy_date).to_string () + "\n");
 
             if (dt_now.difference (this.last_copy_date) <= 180000 && copied_text_hash == this.last_copy_hash) {
                 print("Copied text will be saved. Contend: " + copied_text + "\n");
