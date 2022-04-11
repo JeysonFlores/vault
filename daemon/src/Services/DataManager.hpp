@@ -1,6 +1,5 @@
 #pragma once
 
-#include <iostream>
 #include <sdbus-c++/sdbus-c++.h>
 #include <sqlite_modern_cpp.h>
 #include <vector>

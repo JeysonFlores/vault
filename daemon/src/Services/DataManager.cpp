@@ -70,7 +70,7 @@ sdbus::Struct<int32_t, std::string, std::string> Vault::Daemon::Services::DataMa
  */
 std::tuple<int, std::string> Vault::Daemon::Services::DataManager::Add(std::string note)
 {
-    std::tuple<int, std::string> new_data;
+    std::tuple<int, std::string> newData;
     std::string date;
 
     m_connection << "INSERT INTO notes (id, note, date) VALUES (NULL, ?, datetime('now'));"
@@ -84,9 +84,9 @@ std::tuple<int, std::string> Vault::Daemon::Services::DataManager::Add(std::stri
               date = _date;
           };
 
-    new_data = { id, date };
+    newData = { id, date };
 
-    return new_data;
+    return newData;
 }
 
 /**

@@ -73,8 +73,8 @@ bool Vault::Daemon::Interfaces::Note::Add(const std::string& note)
     LOG(INFO, "Add method called");
 
     try {
-        auto new_note = m_dbManager.Add(note);
-        this->emitNoteAdded(std::get<0>(new_note), note, std::get<1>(new_note));
+        auto newNote = m_dbManager.Add(note);
+        this->emitNoteAdded(std::get<0>(newNote), note, std::get<1>(newNote));
         return true;
     } catch (const std::exception& e) {
         LOG(ERROR, "There was an error setting a Note");
