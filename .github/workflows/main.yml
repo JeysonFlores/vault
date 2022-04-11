@@ -1,0 +1,30 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+        
+  Cpp-Lint-WebKit:
+      name: C++ lint
+      runs-on: ubuntu-latest
+      
+      steps:
+      - uses: actions/checkout@v2
+      
+      - uses: DoozyX/clang-format-lint-action@v0.12
+        with:
+          source: '.'
+          exclude: './daemon/src/Adaptors/generated'
+          extensions: 'hpp,cpp'
+          clangFormatVersion: 10
+          style: WebKit
+
+  Vala-Lint:
+    name: Vala lint
+    runs-on: ubuntu-latest
+    container:
+      image: valalang/lint
+    steps:
+    - uses: actions/checkout@v2
+    - name: Lint
+      run: io.elementary.vala-lint -d ./src/
