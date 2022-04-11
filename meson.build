@@ -1,0 +1,25 @@
+project('com.github.jeysonflores.vault', ['cpp', 'c'], 
+          version: '0.1.0',
+    meson_version: '>= 0.50.0',
+  default_options: [ 'warning_level=2',
+                     'cpp_std=gnu++17',
+                   ],
+)
+
+subdir('data')
+
+executable(
+	meson.project_name(),
+	['src/Vault.hpp'],
+	['src/Application.hpp', 'src/Application.cpp'], 
+	['src/MainWindow.hpp', 'src/MainWindow.cpp'],
+	['src/Style.hpp'],
+	dependencies: [
+		dependency('gtkmm-3.0'),
+		dependency('granite'),
+		dependency('fmt'),
+	],
+	install: true
+)
+
+meson.add_install_script('build-aux/post_install.py')

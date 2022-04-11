@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Vault
+GenericName=Vault
+Comment=Save your code for later
+Categories=Utility;
+Exec=com.github.jeysonflores.vault
+Icon=com.github.jeysonflores.vault
+Terminal=false
+Type=Application
+X-GNOME-Gettext-Domain=com.github.jeysonflores.vault
+Keywords=Utility;
