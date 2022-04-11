@@ -1,9 +1,13 @@
 import dbus
 
+
 def init():
     bus = dbus.SessionBus()
 
-    remote_object = bus.get_object("com.github.jeysonflores.vault.daemon", "/com/github/jeysonflores/vault/daemon/Note")
+    remote_object = bus.get_object(
+        "com.github.jeysonflores.vault.daemon",
+        "/com/github/jeysonflores/vault/daemon/Note",
+    )
 
     return dbus.Interface(remote_object, "com.github.jeysonflores.daemon.Note")
 
