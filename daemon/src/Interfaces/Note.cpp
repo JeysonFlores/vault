@@ -6,8 +6,9 @@
  * @param connection 
  * @param objectPath 
  */
-Vault::Daemon::Interfaces::Note::Note(sdbus::IConnection& connection, std::string objectPath)
+Vault::Daemon::Interfaces::Note::Note(sdbus::IConnection& connection, std::string objectPath, Vault::Daemon::Services::DataManager dbM)
     : AdaptorInterfaces(connection, std::move(objectPath))
+    , m_dbManager(dbM)
 {
     registerAdaptor();
 }
@@ -28,10 +29,14 @@ Vault::Daemon::Interfaces::Note::~Note()
  */
 std::vector<sdbus::Struct<int32_t, std::string, std::string>> Vault::Daemon::Interfaces::Note::GetAll()
 {
-    int i = 0;
-    std::vector<sdbus::Struct<int32_t, std::string, std::string>> result;
+    LOG(INFO, "GetAll method called...");
 
-    return result;
+    try {
+        return m_dbManager.GetNotes();
+    } catch (const std::exception& e) {
+        LOG(ERROR, "There was an error retrieving all Notes");
+        throw sdbus::Error("com.github.jeysonflores.vault.daemon.Error", e.what());
+    }
 }
 
 /**
@@ -42,9 +47,18 @@ std::vector<sdbus::Struct<int32_t, std::string, std::string>> Vault::Daemon::Int
  */
 sdbus::Struct<int32_t, std::string, std::string> Vault::Daemon::Interfaces::Note::GetById(const int32_t& id)
 {
-    sdbus::Struct<int32_t, std::string, std::string> result;
+    LOG(INFO, "GetById method called...");
 
-    return result;
+    if (m_dbManager.Exists(id)) {
+        try {
+            return m_dbManager.GetNoteById(id);
+        } catch (const std::exception& e) {
+            LOG(ERROR, "There was an error retrieving a Note");
+            throw sdbus::Error("com.github.jeysonflores.vault.daemon.Error", e.what());
+        }
+    }
+
+    throw sdbus::Error("com.github.jeysonflores.vault.daemon.Error", "There's no note that matches the given ID");
 }
 
 /**
@@ -56,8 +70,16 @@ sdbus::Struct<int32_t, std::string, std::string> Vault::Daemon::Interfaces::Note
  */
 bool Vault::Daemon::Interfaces::Note::Add(const std::string& note)
 {
-    int i = 0;
-    return true;
+    LOG(INFO, "Add method called");
+
+    try {
+        auto new_note = m_dbManager.Add(note);
+        this->emitNoteAdded(std::get<0>(new_note), note, std::get<1>(new_note));
+        return true;
+    } catch (const std::exception& e) {
+        LOG(ERROR, "There was an error setting a Note");
+        throw sdbus::Error("com.github.jeysonflores.vault.daemon.Error", e.what());
+    }
 }
 
 /**
@@ -70,8 +92,19 @@ bool Vault::Daemon::Interfaces::Note::Add(const std::string& note)
  */
 bool Vault::Daemon::Interfaces::Note::Update(const int32_t& id, const std::string& note)
 {
-    int i = 0;
-    return true;
+    LOG(INFO, "Update method called");
+
+    if (m_dbManager.Exists(id)) {
+        try {
+            m_dbManager.Update(id, note);
+            return true;
+        } catch (const std::exception& e) {
+            LOG(ERROR, "There was an error updating a Note");
+            throw sdbus::Error("com.github.jeysonflores.vault.daemon.Error", e.what());
+        }
+    }
+
+    throw sdbus::Error("com.github.jeysonflores.vault.daemon.Error", "There's no note that matches the given ID");
 }
 
 /**
@@ -83,5 +116,17 @@ bool Vault::Daemon::Interfaces::Note::Update(const int32_t& id, const std::strin
  */
 bool Vault::Daemon::Interfaces::Note::Delete(const int32_t& id)
 {
-    return true;
+    LOG(INFO, "Delete method called");
+
+    if (m_dbManager.Exists(id)) {
+        try {
+            m_dbManager.Remove(id);
+            return true;
+        } catch (const std::exception& e) {
+            LOG(ERROR, "There was an error deleting a Note");
+            throw sdbus::Error("com.github.jeysonflores.vault.daemon.Error", e.what());
+        }
+    }
+
+    throw sdbus::Error("com.github.jeysonflores.vault.daemon.Error", "There's no note that matches the given ID");
 }

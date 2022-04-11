@@ -11,7 +11,7 @@ Vault::Daemon::Services::DataManager::DataManager(const char* databasePath)
     m_connection << "CREATE table IF NOT EXISTS notes ("
                     "   id integer primary key autoincrement not null,"
                     "   note text,"
-                    "   date date"
+                    "   date text"
                     ");";
 }
 
@@ -47,7 +47,7 @@ std::vector<sdbus::Struct<int32_t, std::string, std::string>> Vault::Daemon::Ser
  * @param id 
  * @return sdbus::Struct<int32_t, std::string, std::string> 
  */
-sdbus::Struct<int32_t, std::string, std::string> Vault::Daemon::Services::DataManager::GetNoteById(int& id)
+sdbus::Struct<int32_t, std::string, std::string> Vault::Daemon::Services::DataManager::GetNoteById(int id)
 {
     sdbus::Struct<int32_t, std::string, std::string> queriedNote;
 
@@ -60,4 +60,73 @@ sdbus::Struct<int32_t, std::string, std::string> Vault::Daemon::Services::DataMa
           };
 
     return queriedNote;
+}
+
+/**
+ * @brief Adds a new note to the database.
+ * 
+ * @param note 
+ * @return int 
+ */
+std::tuple<int, std::string> Vault::Daemon::Services::DataManager::Add(std::string note)
+{
+    std::tuple<int, std::string> new_data;
+    std::string date;
+
+    m_connection << "INSERT INTO notes (id, note, date) VALUES (NULL, ?, datetime('now'));"
+                 << note;
+
+    int id = m_connection.last_insert_rowid();
+
+    m_connection << "SELECT date FROM notes WHERE id = ? ;"
+                 << id
+        >> [&](std::string _date) {
+              date = _date;
+          };
+
+    new_data = { id, date };
+
+    return new_data;
+}
+
+/**
+ * @brief Updates a Note's information.
+ * 
+ * @param id 
+ * @param note 
+ */
+void Vault::Daemon::Services::DataManager::Update(int id, std::string note)
+{
+    m_connection << "UPDATE notes SET note = ? WHERE id = ? ;"
+                 << note
+                 << id;
+}
+
+/**
+ * @brief Deletes a Note from the database.
+ * 
+ * @param id 
+ */
+void Vault::Daemon::Services::DataManager::Remove(int id)
+{
+    m_connection << "DELETE FROM notes WHERE id = ? ;"
+                 << id;
+}
+
+/**
+ * @brief Check if a note exits according to the given id.
+ * 
+ * @param id 
+ * @return true 
+ * @return false 
+ */
+bool Vault::Daemon::Services::DataManager::Exists(int id)
+{
+    int rows = 0;
+
+    m_connection << "SELECT COUNT(*) FROM notes WHERE id = ?;"
+                 << id
+        >> rows;
+
+    return rows;
 }

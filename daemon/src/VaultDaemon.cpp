@@ -1,5 +1,5 @@
 #include "Interfaces/Note.hpp"
-//#include "Services/DataManager.h"
+#include "Services/DataManager.hpp"
 #include "Utils/Logger.hpp"
 #include <cstdlib>
 #include <iostream>
@@ -33,9 +33,9 @@ int main(int /*argc*/, char* /*argv*/[])
 
     LOG(INFO, "Database path is: " + dbPath);
 
-    //XpressrService::Services::DataManager dataManager(dbPath.c_str());
+    Vault::Daemon::Services::DataManager dataManager(dbPath.c_str());
 
-    Vault::Daemon::Interfaces::Note server(*connection, "/com/github/jeysonflores/vault/daemon/Note");
+    Vault::Daemon::Interfaces::Note server(*connection, "/com/github/jeysonflores/vault/daemon/Note", dataManager);
 
     LOG(INFO, "Service Starting...");
     connection->enterEventLoop();

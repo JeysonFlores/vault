@@ -18,10 +18,11 @@ namespace Daemon {
 
         public:
             std::vector<sdbus::Struct<int32_t, std::string, std::string>> GetNotes();
-            sdbus::Struct<int32_t, std::string, std::string> GetNoteById(int& id);
-            void Add(std::string& note);
-            void Update(int& id, std::string& note);
-            void Remove(int& id);
+            sdbus::Struct<int32_t, std::string, std::string> GetNoteById(int id);
+            std::tuple<int, std::string> Add(std::string note);
+            void Update(int id, std::string note);
+            void Remove(int id);
+            bool Exists(int id);
         };
     }
 }
