@@ -68,25 +68,13 @@ sdbus::Struct<int32_t, std::string, std::string> Vault::Daemon::Services::DataMa
  * @param note 
  * @return int 
  */
-std::tuple<int, std::string> Vault::Daemon::Services::DataManager::Add(std::string note)
+int Vault::Daemon::Services::DataManager::Add(std::string note, std::string date)
 {
-    std::tuple<int, std::string> newData;
-    std::string date;
+    m_connection << "INSERT INTO notes (id, note, date) VALUES (NULL, ?, ?);"
+                 << note
+                 << date;
 
-    m_connection << "INSERT INTO notes (id, note, date) VALUES (NULL, ?, datetime('now'));"
-                 << note;
-
-    int id = m_connection.last_insert_rowid();
-
-    m_connection << "SELECT date FROM notes WHERE id = ? ;"
-                 << id
-        >> [&](std::string _date) {
-              date = _date;
-          };
-
-    newData = { id, date };
-
-    return newData;
+    return m_connection.last_insert_rowid();
 }
 
 /**
