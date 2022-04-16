@@ -21,7 +21,7 @@ namespace Daemon {
             virtual std::vector<sdbus::Struct<int32_t, std::string, std::string>> GetAll() override;
             virtual sdbus::Struct<int32_t, std::string, std::string> GetById(const int32_t& id) override;
             virtual bool Add(const std::string& note, const std::string& date) override;
-            virtual bool Update(const int32_t& id, const std::string& note) override;
+            virtual bool Update(const int32_t& id, const std::string& note, const std::string& date) override;
             virtual bool Delete(const int32_t& id) override;
 
         private:

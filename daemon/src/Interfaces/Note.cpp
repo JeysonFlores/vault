@@ -90,13 +90,14 @@ bool Vault::Daemon::Interfaces::Note::Add(const std::string& note, const std::st
  * @return true 
  * @return false 
  */
-bool Vault::Daemon::Interfaces::Note::Update(const int32_t& id, const std::string& note)
+bool Vault::Daemon::Interfaces::Note::Update(const int32_t& id, const std::string& note, const std::string& date)
 {
     LOG(INFO, "Update method called");
 
     if (m_dbManager.Exists(id)) {
         try {
             m_dbManager.Update(id, note);
+            this->emitNoteUpdated(id, note, date);
             return true;
         } catch (const std::exception& e) {
             LOG(ERROR, "There was an error updating a Note");
@@ -121,6 +122,7 @@ bool Vault::Daemon::Interfaces::Note::Delete(const int32_t& id)
     if (m_dbManager.Exists(id)) {
         try {
             m_dbManager.Remove(id);
+            this->emitNoteDeleted(id);
             return true;
         } catch (const std::exception& e) {
             LOG(ERROR, "There was an error deleting a Note");
