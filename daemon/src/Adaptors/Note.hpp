@@ -18,7 +18,7 @@ namespace Daemon {
             {
                 m_object_.registerMethod("GetAll").onInterface(INTERFACE_NAME).withOutputParamNames("notes").implementedAs([this]() { return this->GetAll(); });
                 m_object_.registerMethod("GetById").onInterface(INTERFACE_NAME).withInputParamNames("id").withOutputParamNames("note").implementedAs([this](const int32_t& id) { return this->GetById(id); });
-                m_object_.registerMethod("Add").onInterface(INTERFACE_NAME).withInputParamNames("note", "date").withOutputParamNames("was_completed").implementedAs([this](const std::string& note, const std::string& date){ return this->Add(note, date); });
+                m_object_.registerMethod("Add").onInterface(INTERFACE_NAME).withInputParamNames("note", "date").withOutputParamNames("was_completed").implementedAs([this](const std::string& note, const std::string& date) { return this->Add(note, date); });
                 m_object_.registerMethod("Update").onInterface(INTERFACE_NAME).withInputParamNames("id", "note").withOutputParamNames("was_completed").implementedAs([this](const int32_t& id, const std::string& note) { return this->Update(id, note); });
                 m_object_.registerMethod("Delete").onInterface(INTERFACE_NAME).withInputParamNames("id").withOutputParamNames("was_completed").implementedAs([this](const int32_t& id) { return this->Delete(id); });
                 m_object_.registerSignal("NoteAdded").onInterface(INTERFACE_NAME).withParameters<int32_t, std::string, std::string>("id", "note", "date");
