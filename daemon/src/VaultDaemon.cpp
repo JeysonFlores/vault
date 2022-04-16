@@ -23,19 +23,19 @@ int main(int /*argc*/, char* /*argv*/[])
 
     LOG(SUCCESS, "Name requested successfully...");
 
-    std::string dbPath;
+    std::string db_path;
     if (std::getenv("VAULT_DATABASE_PATH"))
-        dbPath = std::getenv("VAULT_DATABASE_PATH");
+        db_path = std::getenv("VAULT_DATABASE_PATH");
     else {
-        std::string filePath = "/.local/share/com.github.jeysonflores.vault.db";
-        dbPath = std::getenv("HOME") + filePath;
+        std::string file_path = "/.local/share/com.github.jeysonflores.vault.db";
+        db_path = std::getenv("HOME") + file_path;
     }
 
-    LOG(INFO, "Database path is: " + dbPath);
+    LOG(INFO, "Database path is: " + db_path);
 
-    Vault::Daemon::Services::DataManager dataManager(dbPath.c_str());
+    Vault::Daemon::Services::DataManager data_manager(db_path.c_str());
 
-    Vault::Daemon::Interfaces::Note server(*connection, "/com/github/jeysonflores/vault/daemon/Note", dataManager);
+    Vault::Daemon::Interfaces::Note server(*connection, "/com/github/jeysonflores/vault/daemon/Note", data_manager);
 
     LOG(INFO, "Service Starting...");
     connection->enterEventLoop();

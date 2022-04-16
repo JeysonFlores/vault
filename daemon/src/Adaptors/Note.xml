@@ -25,7 +25,7 @@
             <arg type="b" name="was_completed" direction="out" />
         </method>
 
-        <method name="Delete">
+        <method name="Remove">
             <arg type="i" name="id" direction="in" />
             <arg type="b" name="was_completed" direction="out" />
         </method>

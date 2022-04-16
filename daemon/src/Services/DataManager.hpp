@@ -9,19 +9,19 @@ namespace Daemon {
     namespace Services {
         class DataManager {
         public:
-            DataManager(const char* databasePath);
+            DataManager(const char* database_path);
             ~DataManager();
 
         private:
             sqlite::database m_connection;
 
         public:
-            std::vector<sdbus::Struct<int32_t, std::string, std::string>> GetNotes();
-            sdbus::Struct<int32_t, std::string, std::string> GetNoteById(int id);
-            int Add(std::string note, std::string date);
-            void Update(int id, std::string note);
-            void Remove(int id);
-            bool Exists(int id);
+            std::vector<sdbus::Struct<int32_t, std::string, std::string>> get_notes();
+            sdbus::Struct<int32_t, std::string, std::string> get_note_by_id(int id);
+            int add(std::string note, std::string date);
+            void update(int id, std::string note);
+            void remove(int id);
+            bool exists(int id);
         };
     }
 }
