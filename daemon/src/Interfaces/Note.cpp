@@ -66,6 +66,7 @@ sdbus::Struct<int32_t, std::string, std::string> Vault::Daemon::Interfaces::Note
  * @brief Registers a new Note into the Daemon, returns if the operation succeeded or not.
  * 
  * @param note 
+ * @param date
  * @return true 
  * @return false 
  */
@@ -88,6 +89,7 @@ bool Vault::Daemon::Interfaces::Note::add(const std::string& note, const std::st
  * 
  * @param id 
  * @param note 
+ * @param date
  * @return true 
  * @return false 
  */

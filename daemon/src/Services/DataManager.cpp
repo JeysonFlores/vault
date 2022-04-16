@@ -66,6 +66,7 @@ sdbus::Struct<int32_t, std::string, std::string> Vault::Daemon::Services::DataMa
  * @brief Adds a new note to the database.
  * 
  * @param note 
+ * @param date
  * @return int 
  */
 int Vault::Daemon::Services::DataManager::add(std::string note, std::string date)
