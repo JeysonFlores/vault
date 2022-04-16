@@ -14,6 +14,7 @@
 
         <method name="Add">
             <arg type="s" name="note" direction="in" />
+            <arg type="s" name="date" direction="in" />
             <arg type="b" name="was_completed" direction="out" />
         </method>
 

@@ -68,13 +68,13 @@ sdbus::Struct<int32_t, std::string, std::string> Vault::Daemon::Interfaces::Note
  * @return true 
  * @return false 
  */
-bool Vault::Daemon::Interfaces::Note::Add(const std::string& note)
+bool Vault::Daemon::Interfaces::Note::Add(const std::string& note, const std::string& date)
 {
     LOG(INFO, "Add method called");
 
     try {
-        auto newNote = m_dbManager.Add(note);
-        this->emitNoteAdded(std::get<0>(newNote), note, std::get<1>(newNote));
+        int id = m_dbManager.Add(note, date);
+        this->emitNoteAdded(id, note, date);
         return true;
     } catch (const std::exception& e) {
         LOG(ERROR, "There was an error setting a Note");
