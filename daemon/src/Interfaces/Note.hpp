@@ -14,18 +14,18 @@ namespace Daemon {
 
         class Note final : public sdbus::AdaptorInterfaces<Vault::Daemon::Adaptors::Note> {
         public:
-            Note(sdbus::IConnection& connection, std::string objectPath, Vault::Daemon::Services::DataManager dbM);
+            Note(sdbus::IConnection& connection, std::string object_path, Vault::Daemon::Services::DataManager dbm);
             ~Note();
 
         private:
-            virtual std::vector<sdbus::Struct<int32_t, std::string, std::string>> GetAll() override;
-            virtual sdbus::Struct<int32_t, std::string, std::string> GetById(const int32_t& id) override;
-            virtual bool Add(const std::string& note, const std::string& date) override;
-            virtual bool Update(const int32_t& id, const std::string& note, const std::string& date) override;
-            virtual bool Delete(const int32_t& id) override;
+            virtual std::vector<sdbus::Struct<int32_t, std::string, std::string>> get_all() override;
+            virtual sdbus::Struct<int32_t, std::string, std::string> get_by_id(const int32_t& id) override;
+            virtual bool add(const std::string& note, const std::string& date) override;
+            virtual bool update(const int32_t& id, const std::string& note, const std::string& date) override;
+            virtual bool remove(const int32_t& id) override;
 
         private:
-            Vault::Daemon::Services::DataManager m_dbManager;
+            Vault::Daemon::Services::DataManager m_db_manager;
         };
     }
 }

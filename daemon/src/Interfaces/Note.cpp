@@ -4,11 +4,12 @@
  * @brief Construct a new Vault::Daemon::Interfaces::Note::Note object
  * 
  * @param connection 
- * @param objectPath 
+ * @param object_path
+ * @param dbm
  */
-Vault::Daemon::Interfaces::Note::Note(sdbus::IConnection& connection, std::string objectPath, Vault::Daemon::Services::DataManager dbM)
-    : AdaptorInterfaces(connection, std::move(objectPath))
-    , m_dbManager(dbM)
+Vault::Daemon::Interfaces::Note::Note(sdbus::IConnection& connection, std::string object_path, Vault::Daemon::Services::DataManager dbm)
+    : AdaptorInterfaces(connection, std::move(object_path))
+    , m_db_manager(dbm)
 {
     registerAdaptor();
 }
@@ -27,12 +28,12 @@ Vault::Daemon::Interfaces::Note::~Note()
  * 
  * @return std::vector<sdbus::Struct<int32_t, std::string, std::string>> 
  */
-std::vector<sdbus::Struct<int32_t, std::string, std::string>> Vault::Daemon::Interfaces::Note::GetAll()
+std::vector<sdbus::Struct<int32_t, std::string, std::string>> Vault::Daemon::Interfaces::Note::get_all()
 {
     LOG(INFO, "GetAll method called...");
 
     try {
-        return m_dbManager.GetNotes();
+        return m_db_manager.get_notes();
     } catch (const std::exception& e) {
         LOG(ERROR, "There was an error retrieving all Notes");
         throw sdbus::Error("com.github.jeysonflores.vault.daemon.Error", e.what());
@@ -45,13 +46,13 @@ std::vector<sdbus::Struct<int32_t, std::string, std::string>> Vault::Daemon::Int
  * @param id 
  * @return sdbus::Struct<int32_t, std::string, std::string> 
  */
-sdbus::Struct<int32_t, std::string, std::string> Vault::Daemon::Interfaces::Note::GetById(const int32_t& id)
+sdbus::Struct<int32_t, std::string, std::string> Vault::Daemon::Interfaces::Note::get_by_id(const int32_t& id)
 {
     LOG(INFO, "GetById method called...");
 
-    if (m_dbManager.Exists(id)) {
+    if (m_db_manager.exists(id)) {
         try {
-            return m_dbManager.GetNoteById(id);
+            return m_db_manager.get_note_by_id(id);
         } catch (const std::exception& e) {
             LOG(ERROR, "There was an error retrieving a Note");
             throw sdbus::Error("com.github.jeysonflores.vault.daemon.Error", e.what());
@@ -68,13 +69,13 @@ sdbus::Struct<int32_t, std::string, std::string> Vault::Daemon::Interfaces::Note
  * @return true 
  * @return false 
  */
-bool Vault::Daemon::Interfaces::Note::Add(const std::string& note, const std::string& date)
+bool Vault::Daemon::Interfaces::Note::add(const std::string& note, const std::string& date)
 {
     LOG(INFO, "Add method called");
 
     try {
-        int id = m_dbManager.Add(note, date);
-        this->emitNoteAdded(id, note, date);
+        int id = m_db_manager.add(note, date);
+        this->emit("note_added", id, note, date);
         return true;
     } catch (const std::exception& e) {
         LOG(ERROR, "There was an error setting a Note");
@@ -90,14 +91,14 @@ bool Vault::Daemon::Interfaces::Note::Add(const std::string& note, const std::st
  * @return true 
  * @return false 
  */
-bool Vault::Daemon::Interfaces::Note::Update(const int32_t& id, const std::string& note, const std::string& date)
+bool Vault::Daemon::Interfaces::Note::update(const int32_t& id, const std::string& note, const std::string& date)
 {
     LOG(INFO, "Update method called");
 
-    if (m_dbManager.Exists(id)) {
+    if (m_db_manager.exists(id)) {
         try {
-            m_dbManager.Update(id, note);
-            this->emitNoteUpdated(id, note, date);
+            m_db_manager.update(id, note);
+            this->emit("note_updated", id, note, date);
             return true;
         } catch (const std::exception& e) {
             LOG(ERROR, "There was an error updating a Note");
@@ -115,14 +116,14 @@ bool Vault::Daemon::Interfaces::Note::Update(const int32_t& id, const std::strin
  * @return true 
  * @return false 
  */
-bool Vault::Daemon::Interfaces::Note::Delete(const int32_t& id)
+bool Vault::Daemon::Interfaces::Note::remove(const int32_t& id)
 {
     LOG(INFO, "Delete method called");
 
-    if (m_dbManager.Exists(id)) {
+    if (m_db_manager.exists(id)) {
         try {
-            m_dbManager.Remove(id);
-            this->emitNoteDeleted(id);
+            m_db_manager.remove(id);
+            this->emit("note_deleted", id);
             return true;
         } catch (const std::exception& e) {
             LOG(ERROR, "There was an error deleting a Note");
