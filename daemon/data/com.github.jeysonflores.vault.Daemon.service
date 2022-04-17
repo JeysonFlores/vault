@@ -1,0 +1,3 @@
+[D-BUS Service]
+Name=com.github.jeysonflores.vault.Daemon
+Exec=com.github.jeysonflores.vault.Daemon

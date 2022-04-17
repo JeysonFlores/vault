@@ -36,7 +36,7 @@ std::vector<sdbus::Struct<int32_t, std::string, std::string>> Vault::Daemon::Int
         return m_db_manager.get_notes();
     } catch (const std::exception& e) {
         LOG(ERROR, "There was an error retrieving all Notes");
-        throw sdbus::Error("com.github.jeysonflores.vault.daemon.Error", e.what());
+        throw sdbus::Error("com.github.jeysonflores.vault.Daemon.Error", e.what());
     }
 }
 
@@ -55,11 +55,11 @@ sdbus::Struct<int32_t, std::string, std::string> Vault::Daemon::Interfaces::Note
             return m_db_manager.get_note_by_id(id);
         } catch (const std::exception& e) {
             LOG(ERROR, "There was an error retrieving a Note");
-            throw sdbus::Error("com.github.jeysonflores.vault.daemon.Error", e.what());
+            throw sdbus::Error("com.github.jeysonflores.vault.Daemon.Error", e.what());
         }
     }
 
-    throw sdbus::Error("com.github.jeysonflores.vault.daemon.Error", "There's no note that matches the given ID");
+    throw sdbus::Error("com.github.jeysonflores.vault.Daemon.Error", "There's no note that matches the given ID");
 }
 
 /**
@@ -80,7 +80,7 @@ bool Vault::Daemon::Interfaces::Note::add(const std::string& note, const std::st
         return true;
     } catch (const std::exception& e) {
         LOG(ERROR, "There was an error setting a Note");
-        throw sdbus::Error("com.github.jeysonflores.vault.daemon.Error", e.what());
+        throw sdbus::Error("com.github.jeysonflores.vault.Daemon.Error", e.what());
     }
 }
 
@@ -104,11 +104,11 @@ bool Vault::Daemon::Interfaces::Note::update(const int32_t& id, const std::strin
             return true;
         } catch (const std::exception& e) {
             LOG(ERROR, "There was an error updating a Note");
-            throw sdbus::Error("com.github.jeysonflores.vault.daemon.Error", e.what());
+            throw sdbus::Error("com.github.jeysonflores.vault.Daemon.Error", e.what());
         }
     }
 
-    throw sdbus::Error("com.github.jeysonflores.vault.daemon.Error", "There's no note that matches the given ID");
+    throw sdbus::Error("com.github.jeysonflores.vault.Daemon.Error", "There's no note that matches the given ID");
 }
 
 /**
@@ -129,9 +129,9 @@ bool Vault::Daemon::Interfaces::Note::remove(const int32_t& id)
             return true;
         } catch (const std::exception& e) {
             LOG(ERROR, "There was an error deleting a Note");
-            throw sdbus::Error("com.github.jeysonflores.vault.daemon.Error", e.what());
+            throw sdbus::Error("com.github.jeysonflores.vault.Daemon.Error", e.what());
         }
     }
 
-    throw sdbus::Error("com.github.jeysonflores.vault.daemon.Error", "There's no note that matches the given ID");
+    throw sdbus::Error("com.github.jeysonflores.vault.Daemon.Error", "There's no note that matches the given ID");
 }
