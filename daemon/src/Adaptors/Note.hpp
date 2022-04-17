@@ -10,7 +10,7 @@ namespace Daemon {
 
         class Note {
         public:
-            static constexpr const char* INTERFACE_NAME = "com.github.jeysonflores.daemon.Note";
+            static constexpr const char* INTERFACE_NAME = "com.github.jeysonflores.vault.Daemon.Note";
 
         protected:
             Note(sdbus::IObject& object)

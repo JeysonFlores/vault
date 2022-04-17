@@ -15,7 +15,7 @@ int main(int /*argc*/, char* /*argv*/[])
     std::unique_ptr<sdbus::IConnection> connection;
 
     try {
-        connection = sdbus::createSessionBusConnection("com.github.jeysonflores.vault.daemon");
+        connection = sdbus::createSessionBusConnection("com.github.jeysonflores.vault.Daemon");
     } catch (std::exception& e) {
         LOG(ERROR, "Name already taken. Aborting...");
         exit(1);
@@ -25,7 +25,7 @@ int main(int /*argc*/, char* /*argv*/[])
 
     std::string db_path;
     if (std::getenv("VAULT_DATABASE_PATH"))
-        db_path = std::getenv("VAULT_DATABASE_PATH");
+        db_path = std::getenv("VAULT_DATABASE_PATH") + std::string("com.github.jeysonflores.vault.db");
     else {
         std::string file_path = "/.local/share/com.github.jeysonflores.vault.db";
         db_path = std::getenv("HOME") + file_path;
@@ -35,7 +35,7 @@ int main(int /*argc*/, char* /*argv*/[])
 
     Vault::Daemon::Services::DataManager data_manager(db_path.c_str());
 
-    Vault::Daemon::Interfaces::Note server(*connection, "/com/github/jeysonflores/vault/daemon/Note", data_manager);
+    Vault::Daemon::Interfaces::Note server(*connection, "/com/github/jeysonflores/vault/Daemon/Note", data_manager);
 
     LOG(INFO, "Service Starting...");
     connection->enterEventLoop();
