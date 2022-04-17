@@ -32,7 +32,7 @@ executable(
   ['src/Views/MainView.vala'],
   ['src/Views/WelcomeView.vala'],
   ['src/Models/Note.vala'],
-  ['src/Interfaces/Note.vala'],
+  ['src/Proxies/Note.vala'],
   c_args: c_args,
   dependencies: [
     dependency('glib-2.0'),
