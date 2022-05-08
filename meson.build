@@ -29,6 +29,8 @@ executable(
   meson.project_name(),
   ['src/Vault.vala'],
   ['src/MainWindow.vala'],
+  ['src/Widgets/Welcome.vala'],
+  ['src/Widgets/WelcomeButton.vala'],
   ['src/Views/MainView.vala'],
   ['src/Views/WelcomeView.vala'],
   ['src/Models/Note.vala'],

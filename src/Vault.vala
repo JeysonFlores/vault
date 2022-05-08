@@ -27,14 +27,6 @@ namespace Vault {
         }
 
         public static int main (string[] args) {
-            var date = new GLib.DateTime.now_local ();
-            print (date.to_string ());
-            print ("\n");
-            print (date.format_iso8601 ());
-            var date2 = new GLib.DateTime.from_iso8601 (date.format_iso8601 (), null);
-            print ("\n");
-            print (date2.format_iso8601 ());
-
             return new Vault.Application ().run (args);
         }
     }
