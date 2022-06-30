@@ -30,12 +30,12 @@
 INIT_LOGGER;
 
 namespace Vault {
-namespace Daemon {
+namespace Core {
     namespace Interfaces {
 
-        class Note final : public sdbus::AdaptorInterfaces<Vault::Daemon::Adaptors::Note> {
+        class Note final : public sdbus::AdaptorInterfaces<Vault::Core::Adaptors::Note> {
         public:
-            Note(sdbus::IConnection& connection, std::string object_path, Vault::Daemon::Services::DataManager dbm);
+            Note(sdbus::IConnection& connection, std::string object_path, Vault::Core::Services::DataManager dbm);
             ~Note();
 
         private:
@@ -46,7 +46,7 @@ namespace Daemon {
             virtual bool remove(const int32_t& id) override;
 
         private:
-            Vault::Daemon::Services::DataManager m_db_manager;
+            Vault::Core::Services::DataManager m_db_manager;
         };
     }
 }

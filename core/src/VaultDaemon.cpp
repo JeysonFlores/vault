@@ -36,7 +36,7 @@ int main(int /*argc*/, char* /*argv*/[])
     std::unique_ptr<sdbus::IConnection> connection;
 
     try {
-        connection = sdbus::createSessionBusConnection("com.github.jeysonflores.vault.Daemon");
+        connection = sdbus::createSessionBusConnection("com.github.jeysonflores.vault.Core");
     } catch (std::exception& e) {
         LOG(ERROR, "Name already taken. Aborting...");
         exit(1);
@@ -54,9 +54,9 @@ int main(int /*argc*/, char* /*argv*/[])
 
     LOG(INFO, "Database path is: " + db_path);
 
-    Vault::Daemon::Services::DataManager data_manager(db_path.c_str());
+    Vault::Core::Services::DataManager data_manager(db_path.c_str());
 
-    Vault::Daemon::Interfaces::Note server(*connection, "/com/github/jeysonflores/vault/Daemon/Note", data_manager);
+    Vault::Core::Interfaces::Note server(*connection, "/com/github/jeysonflores/vault/Core/Note", data_manager);
 
     LOG(INFO, "Service Starting...");
     connection->enterEventLoop();

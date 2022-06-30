@@ -22,11 +22,11 @@
 #include "DataManager.hpp"
 
 /**
- * @brief Construct a new Vault::Daemon::Services::Data Manager::DataManager object
+ * @brief Construct a new Vault::Core::Services::Data Manager::DataManager object
  * 
  * @param database_path 
  */
-Vault::Daemon::Services::DataManager::DataManager(const char* database_path)
+Vault::Core::Services::DataManager::DataManager(const char* database_path)
     : m_connection(sqlite::database(database_path))
 {
     m_connection << "CREATE table IF NOT EXISTS notes ("
@@ -37,10 +37,10 @@ Vault::Daemon::Services::DataManager::DataManager(const char* database_path)
 }
 
 /**
- * @brief Destroy the Vault::Daemon::Services::Data Manager::DataManager object
+ * @brief Destroy the Vault::Core::Services::Data Manager::DataManager object
  * 
  */
-Vault::Daemon::Services::DataManager::~DataManager()
+Vault::Core::Services::DataManager::~DataManager()
 {
 }
 
@@ -49,7 +49,7 @@ Vault::Daemon::Services::DataManager::~DataManager()
  * 
  * @return std::vector<sdbus::Struct<int32_t, std::string, std::string>> 
  */
-std::vector<sdbus::Struct<int32_t, std::string, std::string>> Vault::Daemon::Services::DataManager::get_notes()
+std::vector<sdbus::Struct<int32_t, std::string, std::string>> Vault::Core::Services::DataManager::get_notes()
 {
     std::vector<sdbus::Struct<int32_t, std::string, std::string>> result;
 
@@ -68,7 +68,7 @@ std::vector<sdbus::Struct<int32_t, std::string, std::string>> Vault::Daemon::Ser
  * @param id 
  * @return sdbus::Struct<int32_t, std::string, std::string> 
  */
-sdbus::Struct<int32_t, std::string, std::string> Vault::Daemon::Services::DataManager::get_note_by_id(int id)
+sdbus::Struct<int32_t, std::string, std::string> Vault::Core::Services::DataManager::get_note_by_id(int id)
 {
     sdbus::Struct<int32_t, std::string, std::string> queried_note;
 
@@ -90,7 +90,7 @@ sdbus::Struct<int32_t, std::string, std::string> Vault::Daemon::Services::DataMa
  * @param date
  * @return int 
  */
-int Vault::Daemon::Services::DataManager::add(std::string note, std::string date)
+int Vault::Core::Services::DataManager::add(std::string note, std::string date)
 {
     m_connection << "INSERT INTO notes (id, note, date) VALUES (NULL, ?, ?);"
                  << note
@@ -105,7 +105,7 @@ int Vault::Daemon::Services::DataManager::add(std::string note, std::string date
  * @param id 
  * @param note 
  */
-void Vault::Daemon::Services::DataManager::update(int id, std::string note)
+void Vault::Core::Services::DataManager::update(int id, std::string note)
 {
     m_connection << "UPDATE notes SET note = ? WHERE id = ? ;"
                  << note
@@ -117,7 +117,7 @@ void Vault::Daemon::Services::DataManager::update(int id, std::string note)
  * 
  * @param id 
  */
-void Vault::Daemon::Services::DataManager::remove(int id)
+void Vault::Core::Services::DataManager::remove(int id)
 {
     m_connection << "DELETE FROM notes WHERE id = ? ;"
                  << id;
@@ -130,7 +130,7 @@ void Vault::Daemon::Services::DataManager::remove(int id)
  * @return true 
  * @return false 
  */
-bool Vault::Daemon::Services::DataManager::exists(int id)
+bool Vault::Core::Services::DataManager::exists(int id)
 {
     int rows = 0;
 

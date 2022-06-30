@@ -1,4 +1,4 @@
-[DBus (name = "com.github.jeysonflores.vault.Daemon.Note")]
+[DBus (name = "com.github.jeysonflores.vault.Core.Note")]
 interface Vault.Proxies.Note : Object {
     public abstract Vault.Models.Note[] get_all () throws GLib.Error;
     public abstract Vault.Models.Note get_by_id (int id) throws GLib.Error;
@@ -14,8 +14,8 @@ interface Vault.Proxies.Note : Object {
 public static int main (string[] args) {
     Vault.Proxies.Note iface;
     try {
-        iface = Bus.get_proxy_sync (BusType.SESSION, "com.github.jeysonflores.vault.Daemon",
-                                                            "/com/github/jeysonflores/vault/Daemon/Note");
+        iface = Bus.get_proxy_sync (BusType.SESSION, "com.github.jeysonflores.vault.Core",
+                                                            "/com/github/jeysonflores/vault/Core/Note");
 
 
         //iface.add ("#include <stdlib.h>", new GLib.DateTime.now_local ().format_iso8601 ());

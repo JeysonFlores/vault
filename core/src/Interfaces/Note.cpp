@@ -22,13 +22,13 @@
 #include "Note.hpp"
 
 /**
- * @brief Construct a new Vault::Daemon::Interfaces::Note::Note object
+ * @brief Construct a new Vault::Core::Interfaces::Note::Note object
  * 
  * @param connection 
  * @param object_path
  * @param dbm
  */
-Vault::Daemon::Interfaces::Note::Note(sdbus::IConnection& connection, std::string object_path, Vault::Daemon::Services::DataManager dbm)
+Vault::Core::Interfaces::Note::Note(sdbus::IConnection& connection, std::string object_path, Vault::Core::Services::DataManager dbm)
     : AdaptorInterfaces(connection, std::move(object_path))
     , m_db_manager(dbm)
 {
@@ -36,10 +36,10 @@ Vault::Daemon::Interfaces::Note::Note(sdbus::IConnection& connection, std::strin
 }
 
 /**
- * @brief Destroy the Vault::Daemon::Interfaces::Note::Note object
+ * @brief Destroy the Vault::Core::Interfaces::Note::Note object
  * 
  */
-Vault::Daemon::Interfaces::Note::~Note()
+Vault::Core::Interfaces::Note::~Note()
 {
     unregisterAdaptor();
 }
@@ -49,7 +49,7 @@ Vault::Daemon::Interfaces::Note::~Note()
  * 
  * @return std::vector<sdbus::Struct<int32_t, std::string, std::string>> 
  */
-std::vector<sdbus::Struct<int32_t, std::string, std::string>> Vault::Daemon::Interfaces::Note::get_all()
+std::vector<sdbus::Struct<int32_t, std::string, std::string>> Vault::Core::Interfaces::Note::get_all()
 {
     LOG(INFO, "GetAll method called...");
 
@@ -57,7 +57,7 @@ std::vector<sdbus::Struct<int32_t, std::string, std::string>> Vault::Daemon::Int
         return m_db_manager.get_notes();
     } catch (const std::exception& e) {
         LOG(ERROR, "There was an error retrieving all Notes");
-        throw sdbus::Error("com.github.jeysonflores.vault.Daemon.Error", e.what());
+        throw sdbus::Error("com.github.jeysonflores.vault.Core.Error", e.what());
     }
 }
 
@@ -67,7 +67,7 @@ std::vector<sdbus::Struct<int32_t, std::string, std::string>> Vault::Daemon::Int
  * @param id 
  * @return sdbus::Struct<int32_t, std::string, std::string> 
  */
-sdbus::Struct<int32_t, std::string, std::string> Vault::Daemon::Interfaces::Note::get_by_id(const int32_t& id)
+sdbus::Struct<int32_t, std::string, std::string> Vault::Core::Interfaces::Note::get_by_id(const int32_t& id)
 {
     LOG(INFO, "GetById method called...");
 
@@ -76,22 +76,22 @@ sdbus::Struct<int32_t, std::string, std::string> Vault::Daemon::Interfaces::Note
             return m_db_manager.get_note_by_id(id);
         } catch (const std::exception& e) {
             LOG(ERROR, "There was an error retrieving a Note");
-            throw sdbus::Error("com.github.jeysonflores.vault.Daemon.Error", e.what());
+            throw sdbus::Error("com.github.jeysonflores.vault.Core.Error", e.what());
         }
     }
 
-    throw sdbus::Error("com.github.jeysonflores.vault.Daemon.Error", "There's no note that matches the given ID");
+    throw sdbus::Error("com.github.jeysonflores.vault.Core.Error", "There's no note that matches the given ID");
 }
 
 /**
- * @brief Registers a new Note into the Daemon, returns if the operation succeeded or not.
+ * @brief Registers a new Note into the Core, returns if the operation succeeded or not.
  * 
  * @param note 
  * @param date
  * @return true 
  * @return false 
  */
-bool Vault::Daemon::Interfaces::Note::add(const std::string& note, const std::string& date)
+bool Vault::Core::Interfaces::Note::add(const std::string& note, const std::string& date)
 {
     LOG(INFO, "Add method called");
 
@@ -101,7 +101,7 @@ bool Vault::Daemon::Interfaces::Note::add(const std::string& note, const std::st
         return true;
     } catch (const std::exception& e) {
         LOG(ERROR, "There was an error setting a Note");
-        throw sdbus::Error("com.github.jeysonflores.vault.Daemon.Error", e.what());
+        throw sdbus::Error("com.github.jeysonflores.vault.Core.Error", e.what());
     }
 }
 
@@ -114,7 +114,7 @@ bool Vault::Daemon::Interfaces::Note::add(const std::string& note, const std::st
  * @return true 
  * @return false 
  */
-bool Vault::Daemon::Interfaces::Note::update(const int32_t& id, const std::string& note, const std::string& date)
+bool Vault::Core::Interfaces::Note::update(const int32_t& id, const std::string& note, const std::string& date)
 {
     LOG(INFO, "Update method called");
 
@@ -125,11 +125,11 @@ bool Vault::Daemon::Interfaces::Note::update(const int32_t& id, const std::strin
             return true;
         } catch (const std::exception& e) {
             LOG(ERROR, "There was an error updating a Note");
-            throw sdbus::Error("com.github.jeysonflores.vault.Daemon.Error", e.what());
+            throw sdbus::Error("com.github.jeysonflores.vault.Core.Error", e.what());
         }
     }
 
-    throw sdbus::Error("com.github.jeysonflores.vault.Daemon.Error", "There's no note that matches the given ID");
+    throw sdbus::Error("com.github.jeysonflores.vault.Core.Error", "There's no note that matches the given ID");
 }
 
 /**
@@ -139,7 +139,7 @@ bool Vault::Daemon::Interfaces::Note::update(const int32_t& id, const std::strin
  * @return true 
  * @return false 
  */
-bool Vault::Daemon::Interfaces::Note::remove(const int32_t& id)
+bool Vault::Core::Interfaces::Note::remove(const int32_t& id)
 {
     LOG(INFO, "Delete method called");
 
@@ -150,9 +150,9 @@ bool Vault::Daemon::Interfaces::Note::remove(const int32_t& id)
             return true;
         } catch (const std::exception& e) {
             LOG(ERROR, "There was an error deleting a Note");
-            throw sdbus::Error("com.github.jeysonflores.vault.Daemon.Error", e.what());
+            throw sdbus::Error("com.github.jeysonflores.vault.Core.Error", e.what());
         }
     }
 
-    throw sdbus::Error("com.github.jeysonflores.vault.Daemon.Error", "There's no note that matches the given ID");
+    throw sdbus::Error("com.github.jeysonflores.vault.Core.Error", "There's no note that matches the given ID");
 }

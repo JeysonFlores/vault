@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <node name="/com/github/jeysonflores">
-    <interface name="com.github.jeysonflores.vault.Daemon.Note">
+    <interface name="com.github.jeysonflores.vault.Core.Note">
 
         <method name="GetAll">
             <arg type="a(iss)" name="notes" direction="out" />

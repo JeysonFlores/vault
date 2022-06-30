@@ -26,7 +26,7 @@
 #include <vector>
 
 namespace Vault {
-namespace Daemon {
+namespace Core {
     namespace Services {
         class DataManager {
         public:

@@ -26,12 +26,12 @@
 #include <tuple>
 
 namespace Vault {
-namespace Daemon {
+namespace Core {
     namespace Adaptors {
 
         class Note {
         public:
-            static constexpr const char* INTERFACE_NAME = "com.github.jeysonflores.vault.Daemon.Note";
+            static constexpr const char* INTERFACE_NAME = "com.github.jeysonflores.vault.Core.Note";
 
         protected:
             Note(sdbus::IObject& object)

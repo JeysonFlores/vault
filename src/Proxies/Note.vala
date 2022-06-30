@@ -1,4 +1,4 @@
-[DBus (name = "com.github.jeysonflores.vault.Daemon.Note")]
+[DBus (name = "com.github.jeysonflores.vault.Core.Note")]
 interface Vault.Proxies.Note : Object {
     public abstract Vault.Models.Note[] get_all () throws GLib.Error;
     public abstract Vault.Models.Note get_by_id (int id) throws GLib.Error;

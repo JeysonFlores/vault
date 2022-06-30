@@ -13,11 +13,11 @@
 namespace com {
 namespace github {
     namespace jeysonflores {
-        namespace daemon {
+        namespace Core {
 
             class Note_adaptor {
             public:
-                static constexpr const char* INTERFACE_NAME = "com.github.jeysonflores.daemon.Note";
+                static constexpr const char* INTERFACE_NAME = "com.github.jeysonflores.Core.Note";
 
             protected:
                 Note_adaptor(sdbus::IObject& object)
